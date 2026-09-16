@@ -1,25 +1,26 @@
 # Repository contents
 
-Generated for the 0.2.0 delivery. `CONTENTS.md` itself is omitted from the table to keep generation stable.
+Generated for the 0.3.0 delivery. Runtime evidence (`.levelupdiag/`) and Python caches are not part of the repository package.
 
-Files listed: 75
+Files listed: 85
 
 | Path | Bytes |
 |---|---:|
-| `.github/workflows/self-test.yml` | 394 |
+| `.github/workflows/self-test.yml` | 592 |
 | `.gitignore` | 96 |
 | `.smartignore` | 46 |
-| `CHANGELOG.md` | 683 |
-| `README.md` | 6077 |
-| `REPO_MANIFEST.json` | 12175 |
+| `CHANGELOG.md` | 981 |
+| `LEVELUPDIAG_KRISTAL_LAUNCHER.pyw` | 12353 |
+| `README.md` | 5763 |
+| `REPO_MANIFEST.json` | 13810 |
 | `RUN_KRISTAL_DEEP.bat` | 99 |
-| `RUN_KRISTAL_DEEP.ps1` | 166 |
+| `RUN_KRISTAL_DEEP.ps1` | 268 |
 | `RUN_KRISTAL_DEEP.sh` | 126 |
 | `RUN_KRISTAL_DEEP_SPLIT.bat` | 101 |
-| `RUN_KRISTAL_DEEP_SPLIT.ps1` | 168 |
+| `RUN_KRISTAL_DEEP_SPLIT.ps1` | 254 |
 | `RUN_KRISTAL_DEEP_SPLIT.sh` | 128 |
 | `RUN_KRISTAL_STANDARD.bat` | 103 |
-| `RUN_KRISTAL_STANDARD.ps1` | 170 |
+| `RUN_KRISTAL_STANDARD.ps1` | 272 |
 | `RUN_LEVELUPDIAG.bat` | 193 |
 | `RUN_LEVELUPDIAG.sh` | 191 |
 | `VALIDATE_HARNESS.bat` | 291 |
@@ -31,23 +32,31 @@ Files listed: 75
 | `docs/AI_ADAPTATION_CONTRACT.json` | 1445 |
 | `docs/ARCHITECTURE.md` | 1743 |
 | `docs/CI_INTEGRATION.md` | 977 |
-| `docs/CONFIG_REFERENCE.md` | 1847 |
-| `docs/KRISTAL_TEST_MATRIX.md` | 2870 |
+| `docs/CONFIG_REFERENCE.md` | 2676 |
+| `docs/KRISTAL_TEST_MATRIX.md` | 4600 |
 | `docs/LEVEL_CONTRACT.md` | 1355 |
-| `docs/OPERATING_MODEL.md` | 1881 |
-| `docs/RESULT_MODEL.md` | 963 |
+| `docs/OPERATING_MODEL.md` | 2600 |
+| `docs/RESULT_MODEL.md` | 1515 |
 | `docs/SECURITY_MODEL.md` | 1400 |
-| `docs/status/2026-09-16-initial-deep-validation.md` | 5696 |
+| `docs/status/2026-09-16-initial-deep-validation.md` | 6066 |
+| `docs/status/2026-09-16-rc2-harness-realignment.md` | 1304 |
 | `levels/__init__.py` | 0 |
-| `levels/k10_manifest_integrity.py` | 2815 |
-| `levels/k11_negative_release_gate.py` | 3632 |
-| `levels/k12_release_archive_repro.py` | 2904 |
+| `levels/_kristal_helpers.py` | 3955 |
+| `levels/k10_manifest_integrity.py` | 4365 |
+| `levels/k11_negative_release_gate.py` | 3633 |
+| `levels/k12_release_archive_repro.py` | 4840 |
 | `levels/k13_schema_negative.py` | 2602 |
 | `levels/k14_jcs_fail_closed.py` | 2023 |
-| `levels/k15_conformance_coverage.py` | 1942 |
+| `levels/k15_conformance_coverage.py` | 3061 |
 | `levels/k16_docs_build.py` | 1125 |
-| `levels/k17_tool_consistency.py` | 1052 |
+| `levels/k17_tool_consistency.py` | 2765 |
 | `levels/k18_v5_normative_hygiene.py` | 2144 |
+| `levels/k19_schema_format_fail_closed.py` | 1731 |
+| `levels/k20_cross_document_contract_mutation.py` | 2531 |
+| `levels/k21_git_release_identity.py` | 3762 |
+| `levels/k22_tck_profile_consistency.py` | 2539 |
+| `levels/k23_runtime_pack_contract.py` | 3162 |
+| `levels/k24_signature_trust.py` | 3013 |
 | `levels/n00_diagnostic_integrity.py` | 1543 |
 | `levels/n01_target_context.py` | 3313 |
 | `levels/n02_repository_inventory.py` | 2237 |
@@ -55,8 +64,8 @@ Files listed: 75
 | `levels/n04_tooling_discovery.py` | 2428 |
 | `levels/n05_declared_validations.py` | 2903 |
 | `levels/n06_security_hygiene.py` | 3115 |
-| `levelupdiag.config.json` | 2669 |
-| `levelupdiag.config.local.example.json` | 144 |
+| `levelupdiag.config.json` | 2889 |
+| `levelupdiag.config.local.example.json` | 1133 |
 | `levelupdiag.py` | 310 |
 | `levelupdiag_core/__init__.py` | 134 |
 | `levelupdiag_core/cli.py` | 4222 |
@@ -70,14 +79,15 @@ Files listed: 75
 | `levelupdiag_core/vcs.py` | 844 |
 | `levelupdiag_core/verdicts.py` | 1641 |
 | `levelupdiag_core/worker.py` | 1466 |
-| `levelupdiag_manifest.json` | 7520 |
+| `levelupdiag_manifest.json` | 10439 |
 | `pyproject.toml` | 414 |
 | `requirements-dev.txt` | 60 |
 | `schemas/campaign-summary.schema.json` | 745 |
 | `schemas/report.schema.json` | 778 |
-| `scripts/run_deep_split.py` | 1791 |
+| `scripts/run_deep_split.py` | 9462 |
 | `tests/__init__.py` | 0 |
 | `tests/test_commands.py` | 429 |
 | `tests/test_external_mode.py` | 1822 |
 | `tests/test_manifest.py` | 404 |
+| `tests/test_v03_contract.py` | 1547 |
 | `tests/test_verdicts.py` | 595 |

@@ -1,75 +1,100 @@
 # Kristal validation matrix
 
-## Native/release surfaces
+## Native framework and release surfaces
 
 | Area | Evidence | Harness level |
 |---|---|---|
-| required release files | `tools/validate_release.py` | N05 |
-| JSON parse / Draft 2020-12 schemas | native validator | N05 |
-| schema IDs | native validator | N05 |
-| examples against schemas | native validator | N05 |
-| version alignment | `tools/check_version_alignment.py` | N05 |
-| docs links/navigation | `tools/check_docs.py` | N05 |
-| JCS vectors | `tools/check_jcs_vectors.mjs` | N05 / K14 |
-| schema-set coverage/hash/digest | independent cross-check | K10 |
-| release metadata/canonicalization identity | independent cross-check | K10 |
-| manifest tooling vs release policy | independent cross-check | K17 |
-| v5 acceptance-document hygiene | independent cross-check | K18 |
+| complete native framework gate | `tools/validate_release.py` / `tools/validate_conformance.py` | N05 |
+| version/canonicalization/release metadata | independent cross-check | K10 |
+| curated contract surfaces + retired model absence | independent cross-check | K10 / K17 |
+| adversarial release-gate mutations | isolated temporary copies | K11 |
+| Git-only deterministic release ZIP | temporary committed Git fixtures | K12 |
+| generated negative JSON Schema cases | schema/example mutation campaign | K13 |
+| JCS tamper/fail-closed | vector mutation campaign | K14 |
+| framework TCK vs implementation coverage | EX/RP inventory + adapter readiness | K15 |
+| strict documentation build | `mkdocs build --strict` | K16 |
+| retired manifest model guard | docs/tool/archive policy cross-check | K17 |
+| v5 normative hygiene | documentation/version scan | K18 |
+| JSON Schema format enforcement | invalid date-time + URI mutations | K19 |
+| cross-document semantic invariants | runtime pack/reference-exchange mutations | K20 |
+| Git tag/commit/version identity | actual target Git metadata | K21 |
+| TCK/profile consistency | vectors + docs + native conformance gate | K22 |
+| Runtime Pack contract | type/version/profile/tamper semantics | K23 |
+| signatures/trust | contract checks + external crypto adapter requirement | K24 |
 
-## Adversarial/fail-closed surfaces
+## rc.2 release model
 
-K11 creates isolated target copies and verifies that the native release gate rejects critical mutations:
+LevelUpDiag v0.3 follows the Kristal rc.2 release model:
 
-- version/release mismatch;
-- downgraded example schema version;
-- invalid schema `$id`;
-- broken local documentation link;
-- missing declared contract surface;
-- tampered JCS expected hash;
-- normative schema content drift without manifest update;
-- tampered schema-manifest hash.
+- Git tag + immutable commit identify published repository bytes;
+- `contract-set.manifest.json` is a curated contract-surface index, not a per-file hash inventory;
+- `schema-set.manifest.json` is retired;
+- `tools/build_manifests.py` is retired;
+- the release archive is built from Git-tracked files;
+- normal release archive builds require a clean worktree;
+- `--allow-dirty` is diagnostic-only and must not admit untracked files into the archive.
 
-A mutation that is accepted by the native release validator is a **FAIL** even if the baseline release gate is green.
+## K11 — global fail-closed gate
 
-## Reproducibility surfaces
+K11 verifies that `tools/validate_release.py` rejects:
 
-K12 verifies:
+- `VERSION` / release mismatch;
+- an example downgraded to schema version 4.0;
+- an invalid schema `$id`;
+- a broken local documentation link;
+- a missing curated contract surface;
+- a tampered JCS expected hash;
+- an unsupported canonicalization version;
+- reappearance of `schema-set.manifest.json`;
+- reappearance of `tools/build_manifests.py`.
 
-- two independent clean release archive builds are byte-identical;
-- fixed ZIP timestamps;
-- standard VCS/build paths are excluded;
-- diagnostic evidence does not contaminate the release artifact.
+Format-specific and cross-document semantic mutations live in K19 and K20 rather than being duplicated here.
 
-K13 performs generated negative schema tests by changing `schema_version` and removing top-level required fields from published examples.
+## K12 — Git release archive
 
-K14 verifies JCS fail-closed behavior by tampering expected hashes and vector inputs.
+K12 creates fresh temporary Git repositories from the current target bytes, commits them, then verifies:
 
-## Implementation-conformance surfaces
+- two independent clean builds are byte-identical;
+- ZIP timestamps are fixed;
+- `.git`, `dist`, `site`, Python caches and `CODE_SNAPSHOT_MANIFEST.md` are excluded;
+- the normal builder rejects untracked/dirty worktrees;
+- diagnostic `--allow-dirty` builds ignore untracked `.levelupdiag` and arbitrary temporary files;
+- modified tracked bytes are rejected by the normal builder.
 
-K15 inspects whether the documented Exchange and Runtime Pack acceptance cases have executable coverage.
+The test no longer strips `.git` and then asks a Git-dependent builder to run.
 
-Expected normative case set:
+## K15 — implementation conformance boundary
+
+Framework-vector conformance and implementation conformance remain distinct.
+
+Required normative acceptance cases:
 
 ```text
 EX-1 EX-2 EX-3 EX-4
 RP-1 RP-2 RP-3 RP-4 RP-5 RP-6
 ```
 
-Until Kristal exposes a reference Exchange/Runtime Pack builder/verifier and executable fixtures, this layer should remain `BLOCKED`, not PASS.
+K15 expects the framework TCK and vectors to exist. Full implementation conformance remains `BLOCKED` until an external implementation adapter is configured with at least:
 
-## Future levels
+```text
+exchange_id
+verify_exchange
+build_runtime_pack
+verify_runtime_pack
+```
 
-When implementation tooling exists, extend the suite with native Kristal tests rather than duplicating implementation semantics here:
+The implementation does not need to live in `kristal-framework`.
 
-- canonical Exchange byte equality;
-- `kristal_id` equality across repeated/cross-toolchain builds;
-- signature-envelope invariance;
-- fail-closed Exchange verification;
-- Runtime Pack `pack_id` equality;
-- payload/row-group/index determinism;
-- Runtime Pack delete/rebuild identity;
-- query-result equivalence;
-- revocation/authority/Reader Policy behavior;
-- Windows/Linux cross-platform determinism;
-- Da’at `build.request -> artifact.ready` E2E;
-- retry/idempotency/crash-recovery scenarios through Interaction Kernel.
+## K19–K24
+
+K19 verifies `FormatChecker`-style enforcement using invalid date-time and URI mutations.
+
+K20 breaks cross-document invariants, including Runtime Pack version/type conventions and mandatory authority recognition for Reference Exchange.
+
+K21 distinguishes an unpublished release-candidate worktree from a published tag. A dirty worktree is visible as `WARN`; a published tag with a missing/mismatched immutable commit pin is a `FAIL`.
+
+K22 verifies that Exchange and Runtime Pack vector profiles agree with the TCK documentation and native conformance gate.
+
+K23 verifies Runtime Pack artifact type, version shape, core `5.0.0` vectors and explicit tamper rejection.
+
+K24 validates the published security contract but remains `BLOCKED` for executable cryptographic conformance until an external verifier exposes signature/trust operations. A contract-only PASS is not promoted to production-security PASS.

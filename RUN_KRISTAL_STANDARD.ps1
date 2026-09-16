@@ -1,4 +1,10 @@
+param(
+    [string]$Target
+)
 $ErrorActionPreference = "Stop"
 $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
-& python (Join-Path $Here "levelupdiag.py") run standard @args
+$Cmd = @((Join-Path $Here "levelupdiag.py"))
+if ($Target) { $Cmd += @("--target", $Target) }
+$Cmd += @("run", "standard")
+& python @Cmd
 exit $LASTEXITCODE

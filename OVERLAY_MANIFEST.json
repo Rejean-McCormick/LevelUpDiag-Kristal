@@ -1,0 +1,43 @@
+{
+  "from_version": "0.2.0",
+  "to_version": "0.3.0",
+  "added": [
+    "LEVELUPDIAG_KRISTAL_LAUNCHER.pyw",
+    "docs/status/2026-09-16-rc2-harness-realignment.md",
+    "levels/_kristal_helpers.py",
+    "levels/k19_schema_format_fail_closed.py",
+    "levels/k20_cross_document_contract_mutation.py",
+    "levels/k21_git_release_identity.py",
+    "levels/k22_tck_profile_consistency.py",
+    "levels/k23_runtime_pack_contract.py",
+    "levels/k24_signature_trust.py",
+    "tests/test_v03_contract.py"
+  ],
+  "modified": [
+    ".github/workflows/self-test.yml",
+    "CHANGELOG.md",
+    "CONTENTS.md",
+    "README.md",
+    "REPO_MANIFEST.json",
+    "RUN_KRISTAL_DEEP.ps1",
+    "RUN_KRISTAL_DEEP_SPLIT.ps1",
+    "RUN_KRISTAL_STANDARD.ps1",
+    "VERSION",
+    "docs/CONFIG_REFERENCE.md",
+    "docs/KRISTAL_TEST_MATRIX.md",
+    "docs/OPERATING_MODEL.md",
+    "docs/RESULT_MODEL.md",
+    "docs/status/2026-09-16-initial-deep-validation.md",
+    "levels/k10_manifest_integrity.py",
+    "levels/k11_negative_release_gate.py",
+    "levels/k12_release_archive_repro.py",
+    "levels/k15_conformance_coverage.py",
+    "levels/k17_tool_consistency.py",
+    "levelupdiag.config.json",
+    "levelupdiag.config.local.example.json",
+    "levelupdiag_manifest.json",
+    "pyproject.toml",
+    "scripts/run_deep_split.py"
+  ],
+  "deleted": []
+}

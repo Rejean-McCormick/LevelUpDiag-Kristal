@@ -46,3 +46,26 @@ Configuration is JSON. `levelupdiag.config.json` is committed. `levelupdiag.conf
 ```
 
 Commands use argument arrays and execute with `shell=False`. Discovery does not imply execution.
+
+## External implementation adapter
+
+Implementation conformance is intentionally external to the Kristal framework repository. Configure the adapter in `levelupdiag.config.local.json`, not in the committed default config.
+
+```json
+{
+  "implementation_adapter": {
+    "enabled": true,
+    "cwd": "../kristal-reference",
+    "commands": {
+      "exchange_id": ["..."],
+      "verify_exchange": ["..."],
+      "build_runtime_pack": ["..."],
+      "verify_runtime_pack": ["..."],
+      "verify_signature": ["..."],
+      "verify_trust": ["..."]
+    }
+  }
+}
+```
+
+v0.3 uses the first four operation declarations for implementation-readiness evidence. `verify_signature` and `verify_trust` are required before K24 can move beyond `BLOCKED`/`PARTIAL`. Portable signed-fixture I/O semantics are intentionally not invented by the harness.

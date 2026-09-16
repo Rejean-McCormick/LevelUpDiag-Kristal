@@ -57,3 +57,11 @@ There are two distinct CI jobs:
 - **Kristal qualification** in an environment where both repositories are available: execute `deep` against the target checkout.
 
 Do not vendor this harness into the Kristal release archive.
+
+## Deep Split master verdict
+
+The split runner is an execution strategy, not a weaker verdict model. After all isolated invocations complete, it rebuilds the full deep-campaign result and overwrites `latest/summary.json` with that consolidated verdict. A final PASS from the last isolated level can no longer hide an earlier FAIL or BLOCKED result.
+
+## External implementation boundary
+
+A concrete compiler/verifier SHOULD remain in its own repository. `levelupdiag_kristal` connects to it through `implementation_adapter` configuration and consumes Kristal's official framework vectors. The harness must not move implementation semantics into the Kristal framework repository merely to make a diagnostic level green.

@@ -1,3 +1,6 @@
+> **Historical v0.2 evidence — superseded by Kristal rc.2 and LevelUpDiag v0.3.**
+> The findings below describe the pre-rc.2 release model that motivated the correction. Do not follow the old recommendation to regenerate `schema-set.manifest.json`; rc.2 intentionally retired that file and `tools/build_manifests.py` in favor of the curated Git-pinned release model.
+
 # Kristal Deep Validation Report — 2026-09-16
 
 ## Verdict

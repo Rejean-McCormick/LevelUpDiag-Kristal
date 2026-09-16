@@ -95,16 +95,15 @@
       "network": false
     },
     {
-      "id": "manifest-generator",
-      "name": "Manifest generator consistency (diagnostic)",
+      "id": "framework-conformance",
+      "name": "Kristal framework-vector conformance",
       "command": [
         "python",
-        "tools/build_manifests.py",
-        "--check"
+        "tools/validate_conformance.py"
       ],
       "cwd": ".",
-      "required": false,
-      "timeout_seconds": 60,
+      "required": true,
+      "timeout_seconds": 120,
       "mutates_target": false,
       "network": false
     }
@@ -119,5 +118,11 @@
     "enabled": true,
     "replacement": "<REDACTED>"
   },
-  "control_root": "tool"
+  "control_root": "tool",
+  "implementation_adapter": {
+    "enabled": false,
+    "cwd": "../kristal-reference",
+    "commands": {},
+    "note": "Configure only in levelupdiag.config.local.json when an external compiler/verifier implementation is available."
+  }
 }

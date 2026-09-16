@@ -3,7 +3,7 @@
   "standard": "LevelUpDiag",
   "standard_version": "1.0.0",
   "suite_name": "Kristal Deep Conformance Diagnostics",
-  "suite_version": "0.2.0",
+  "suite_version": "0.3.0",
   "repository_mode": "external-target-harness",
   "control_dir_default": ".levelupdiag",
   "levels": [
@@ -106,7 +106,7 @@
     },
     {
       "id": "K10",
-      "name": "Kristal Manifest Integrity",
+      "name": "Kristal Release Model Integrity",
       "module": "levels.k10_manifest_integrity",
       "category": "kristal",
       "order": 100,
@@ -116,7 +116,7 @@
       ],
       "timeout_seconds": 300,
       "parallel_safe": false,
-      "purpose": "Validate schema manifest hashes/digests and release identity."
+      "purpose": "Validate rc.2 curated release surfaces, version/canonicalization identity and absence of retired per-file manifest machinery."
     },
     {
       "id": "K11",
@@ -130,11 +130,11 @@
       ],
       "timeout_seconds": 300,
       "parallel_safe": false,
-      "purpose": "Mutate critical release inputs and verify the release gate fails closed."
+      "purpose": "Mutate critical release inputs and verify the rc.2 native release gate fails closed."
     },
     {
       "id": "K12",
-      "name": "Kristal Release Archive Reproducibility",
+      "name": "Kristal Git Release Archive Reproducibility",
       "module": "levels.k12_release_archive_repro",
       "category": "kristal",
       "order": 120,
@@ -144,7 +144,7 @@
       ],
       "timeout_seconds": 300,
       "parallel_safe": false,
-      "purpose": "Build release archives repeatedly and test runtime-evidence isolation."
+      "purpose": "Build releases from temporary Git repos and test determinism, clean-tree enforcement and untracked-evidence isolation."
     },
     {
       "id": "K13",
@@ -186,7 +186,7 @@
       ],
       "timeout_seconds": 300,
       "parallel_safe": false,
-      "purpose": "Assess executable coverage of normative EX/RP conformance requirements."
+      "purpose": "Separate framework-vector TCK coverage from external implementation-adapter conformance readiness."
     },
     {
       "id": "K16",
@@ -204,7 +204,7 @@
     },
     {
       "id": "K17",
-      "name": "Kristal Tool Consistency",
+      "name": "Kristal Retired Release Model Guard",
       "module": "levels.k17_tool_consistency",
       "category": "kristal",
       "order": 170,
@@ -214,7 +214,7 @@
       ],
       "timeout_seconds": 300,
       "parallel_safe": false,
-      "purpose": "Ensure repository manifest tooling agrees with the authoritative release policy."
+      "purpose": "Ensure retired manifest tooling remains absent and current release/archive policy stays Git-pinned and curated."
     },
     {
       "id": "K18",
@@ -229,6 +229,90 @@
       "timeout_seconds": 180,
       "parallel_safe": true,
       "purpose": "Detect stale major-version markers and release-status ambiguity in normative v5 validation documentation."
+    },
+    {
+      "id": "K19",
+      "name": "Kristal Schema Format Fail-Closed",
+      "module": "levels.k19_schema_format_fail_closed",
+      "category": "kristal",
+      "order": 190,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Verify date-time and URI format constraints are enforced fail-closed by native schema validation."
+    },
+    {
+      "id": "K20",
+      "name": "Kristal Cross-Document Contract Mutation",
+      "module": "levels.k20_cross_document_contract_mutation",
+      "category": "kristal",
+      "order": 200,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Mutate cross-document normative invariants and verify the release gate rejects semantic drift."
+    },
+    {
+      "id": "K21",
+      "name": "Kristal Git Release Identity",
+      "module": "levels.k21_git_release_identity",
+      "category": "kristal",
+      "order": 210,
+      "required": true,
+      "depends_on": [
+        "N01"
+      ],
+      "timeout_seconds": 120,
+      "parallel_safe": false,
+      "purpose": "Verify VERSION/tag/commit publication state against the authoritative Git worktree."
+    },
+    {
+      "id": "K22",
+      "name": "Kristal TCK Profile Consistency",
+      "module": "levels.k22_tck_profile_consistency",
+      "category": "kristal",
+      "order": 220,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 240,
+      "parallel_safe": false,
+      "purpose": "Cross-check Exchange and Runtime Pack TCK identity profiles against documentation and the native conformance gate."
+    },
+    {
+      "id": "K23",
+      "name": "Kristal Runtime Pack Contract",
+      "module": "levels.k23_runtime_pack_contract",
+      "category": "kristal",
+      "order": 230,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Verify Runtime Pack version/type/profile/tamper semantics and reject invalid core vectors."
+    },
+    {
+      "id": "K24",
+      "name": "Kristal Signature and Trust",
+      "module": "levels.k24_signature_trust",
+      "category": "kristal",
+      "order": 240,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 180,
+      "parallel_safe": false,
+      "purpose": "Validate signature/trust contract surfaces and require an external crypto adapter for executable security conformance."
     }
   ],
   "campaigns": {
@@ -256,7 +340,7 @@
       ]
     },
     "deep": {
-      "description": "Maximum local Kristal validation: neutral diagnostics, native validators, fail-closed mutation tests, reproducibility and conformance coverage.",
+      "description": "Maximum local Kristal validation: native gates, adversarial mutations, Git/archive reproducibility, TCK/profile coherence, Runtime Pack contracts and signature/trust readiness.",
       "levels": [
         "N00",
         "N01",
@@ -273,7 +357,13 @@
         "K15",
         "K16",
         "K17",
-        "K18"
+        "K18",
+        "K19",
+        "K20",
+        "K21",
+        "K22",
+        "K23",
+        "K24"
       ]
     }
   }

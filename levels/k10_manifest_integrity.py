@@ -1,37 +1,94 @@
 from __future__ import annotations
-import hashlib, json
-from pathlib import Path
 
-def digest_entries(entries):
-    payload=''.join(f"{e['path']}\0{e['sha256']}\n" for e in sorted(entries,key=lambda x:x['path']))
-    return hashlib.sha256(payload.encode()).hexdigest()
+import json
+from pathlib import Path
+from ._kristal_helpers import flatten_keys
+
+RETIRED = ('schema-set.manifest.json', 'tools/build_manifests.py')
+
 
 def run(cfg, report):
-    root=Path(cfg['_target_root'])
-    version=(root/'VERSION').read_text(encoding='utf-8').strip()
-    sm=json.loads((root/'schema-set.manifest.json').read_text(encoding='utf-8'))
-    schema_dir=root/'docs/Technical-Reference/kristal-docs-v5/02-schemas'
-    actual=sorted(p.relative_to(root).as_posix() for p in schema_dir.glob('*.json'))
-    entries=sm.get('entries',[])
-    listed=sorted(e.get('path') for e in entries if isinstance(e,dict))
-    report.add('kristal.schema_manifest.coverage', 'PASS' if listed==actual else 'FAIL','manifest',
-               'Schema manifest covers exactly the normative schema files.' if listed==actual else 'Schema manifest file set differs from normative schema directory.',
-               evidence={'listed':len(listed),'actual':len(actual),'missing':sorted(set(actual)-set(listed)),'extra':sorted(set(listed)-set(actual))})
-    bad=[]
-    for e in entries:
-        p=root/e['path']
-        if not p.is_file(): bad.append({'path':e['path'],'reason':'missing'}); continue
-        got=hashlib.sha256(p.read_bytes()).hexdigest()
-        if got!=e.get('sha256'): bad.append({'path':e['path'],'expected':e.get('sha256'),'actual':got})
-    report.add('kristal.schema_manifest.file_hashes','FAIL' if bad else 'PASS','manifest',
-               'All schema manifest file hashes match.' if not bad else 'Schema manifest contains stale or invalid file hashes.', evidence=bad or None)
-    computed='sha256:'+digest_entries(entries)
-    report.add('kristal.schema_manifest.set_digest','PASS' if computed==sm.get('schema_set_digest') else 'FAIL','manifest',
-               'Schema-set digest matches the entry set.' if computed==sm.get('schema_set_digest') else 'Schema-set digest does not match the manifest entries.',
-               evidence={'declared':sm.get('schema_set_digest'),'computed':computed})
-    report.add('kristal.schema_manifest.release','PASS' if sm.get('release')==version else 'FAIL','manifest',
-               'Schema manifest release matches VERSION.' if sm.get('release')==version else 'Schema manifest release does not match VERSION.')
-    kr=json.loads((root/'kristal-release.json').read_text(encoding='utf-8'))
-    ok=(kr.get('version')==version and kr.get('canonicalization_profile')=='kristal.v5:jcs-rfc8785')
-    report.add('kristal.release_identity.basic','PASS' if ok else 'FAIL','release',
-               'Release identity and canonicalization profile are aligned.' if ok else 'Release identity/canonicalization mismatch.', evidence={'version':version,'release':kr})
+    root = Path(cfg['_target_root'])
+    version = (root / 'VERSION').read_text(encoding='utf-8').strip()
+    release = json.loads((root / 'kristal-release.json').read_text(encoding='utf-8'))
+    contracts = json.loads((root / 'contract-set.manifest.json').read_text(encoding='utf-8'))
+
+    aligned = release.get('version') == version and contracts.get('release') == version
+    report.add(
+        'kristal.release_identity.version_alignment',
+        'PASS' if aligned else 'FAIL', 'release',
+        'VERSION, kristal-release.json and contract-set.manifest.json are aligned.' if aligned
+        else 'Release version declarations are not aligned.',
+        evidence={
+            'VERSION': version,
+            'kristal_release_version': release.get('version'),
+            'contract_set_release': contracts.get('release'),
+        },
+    )
+
+    commit_ok = release.get('git', {}).get('commit') is None
+    report.add(
+        'kristal.release_identity.no_self_embedded_commit',
+        'PASS' if commit_ok else 'FAIL', 'release',
+        'Release manifest does not self-embed the commit that contains itself.' if commit_ok
+        else 'Release manifest self-embeds a Git commit contrary to the rc.2 tag-resolution model.',
+        evidence={'git.commit': release.get('git', {}).get('commit')},
+    )
+
+    profile_ok = (
+        release.get('canonicalization_profile') == 'kristal.v5:jcs-rfc8785'
+        and release.get('canonicalization_version') == '1'
+    )
+    report.add(
+        'kristal.release_identity.canonicalization',
+        'PASS' if profile_ok else 'FAIL', 'release',
+        'Canonicalization profile and version match the v5 release contract.' if profile_ok
+        else 'Canonicalization profile/version drifted.',
+        evidence={
+            'profile': release.get('canonicalization_profile'),
+            'version': release.get('canonicalization_version'),
+        },
+    )
+
+    present = [p for p in RETIRED if (root / p).exists()]
+    report.add(
+        'kristal.release_model.retired_artifacts_absent',
+        'PASS' if not present else 'FAIL', 'release',
+        'Retired per-file release manifest machinery is absent.' if not present
+        else 'Retired release artifacts reappeared.',
+        evidence=present or None,
+        recommendation='Remove schema-set.manifest.json and tools/build_manifests.py; rc.2 uses Git-pinned curated surfaces.' if present else None,
+    )
+
+    missing = []
+    surfaces = []
+    for section in ('normative_surfaces', 'profile_surfaces', 'conformance_surfaces', 'informative_surfaces'):
+        for entry in contracts.get(section, []):
+            path = entry.get('path')
+            surfaces.append({'section': section, 'name': entry.get('name'), 'path': path})
+            if not path or not (root / path).exists():
+                missing.append(path or f'<missing path:{entry.get("name")}>')
+    report.add(
+        'kristal.contract_surfaces.exist',
+        'PASS' if surfaces and not missing else 'FAIL', 'release',
+        'All curated contract surfaces exist.' if surfaces and not missing else 'One or more curated contract surfaces are missing.',
+        evidence={'surface_count': len(surfaces), 'missing': missing},
+    )
+
+    hashish = sorted({k for k in flatten_keys(contracts) if k in {'sha256', 'digest', 'file_hash', 'content_hash'}})
+    report.add(
+        'kristal.contract_surfaces.curated_not_file_hash_inventory',
+        'PASS' if not hashish else 'FAIL', 'release',
+        'contract-set.manifest.json remains a curated surface index, not a per-file hash inventory.' if not hashish
+        else 'contract-set.manifest.json contains per-file/hash-style keys inconsistent with the curated-surface model.',
+        evidence=hashish or None,
+    )
+
+    expected_tag = f'v{version}'
+    tag_ok = release.get('git', {}).get('tag') == expected_tag
+    report.add(
+        'kristal.release_identity.tag_name',
+        'PASS' if tag_ok else 'FAIL', 'release',
+        'Release tag metadata matches VERSION.' if tag_ok else 'Release tag metadata does not match VERSION.',
+        evidence={'expected': expected_tag, 'declared': release.get('git', {}).get('tag')},
+    )
