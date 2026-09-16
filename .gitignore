@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.levelupdiag/
+levelupdiag.config.local.json
+*.log
+.DS_Store

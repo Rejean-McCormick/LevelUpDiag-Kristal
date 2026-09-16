@@ -1,0 +1,385 @@
+{
+  "schema": "levelupdiag-kristal.repo-manifest.v1",
+  "repo_name": "levelupdiag_kristal",
+  "version": "0.2.0",
+  "generated_at": "2026-09-16",
+  "default_target": "../kristal-framework",
+  "evidence_root": ".levelupdiag",
+  "files": [
+    {
+      "path": ".github/workflows/self-test.yml",
+      "bytes": 394,
+      "sha256": "ce1e54d9a9fcd29fea334950f16e6b1bee997e0587e2e5bbce258154e67c0690"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 96,
+      "sha256": "35840601450c29ea56be8e8300eafd9972d0306ad1bf8f4da18d1b03017b1d16"
+    },
+    {
+      "path": ".smartignore",
+      "bytes": 46,
+      "sha256": "61c524b048309fca99c7fe9628c26063234614d9c0cb878aaa384873f9f9cde1"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 683,
+      "sha256": "cc30eab646d5f83e53f1cd856dd71eb5c2a06d5f2fc17f5056702f698a9b5a49"
+    },
+    {
+      "path": "CONTENTS.md",
+      "bytes": 3010,
+      "sha256": "8b4135b64cc49e4b44852401aeb44c661a7f17bc208c0ff5942af87669a48e97"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6077,
+      "sha256": "88f3160f3b5f66ec3a8ea64f8834f2b29bd947029211e006fafa34767a4321c4"
+    },
+    {
+      "path": "RUN_KRISTAL_DEEP.bat",
+      "bytes": 99,
+      "sha256": "c34b9057810298d07b7d501e97bdc5ba710b49c6e4ed57881369855b0499d776"
+    },
+    {
+      "path": "RUN_KRISTAL_DEEP.ps1",
+      "bytes": 166,
+      "sha256": "c6b47c725acb88b0916842df6640adc661973a411e7f7870309150b956929dd9"
+    },
+    {
+      "path": "RUN_KRISTAL_DEEP.sh",
+      "bytes": 126,
+      "sha256": "07299beba066b9940fe0ee106fb6905d319a07e68570a339e784db5ef97c9d3b"
+    },
+    {
+      "path": "RUN_KRISTAL_DEEP_SPLIT.bat",
+      "bytes": 101,
+      "sha256": "961d32f31b4bf43a3ac740e80638bffd2985f2077b31e6e385e11268ce91bdac"
+    },
+    {
+      "path": "RUN_KRISTAL_DEEP_SPLIT.ps1",
+      "bytes": 168,
+      "sha256": "785cbe42a8af48a97d852537fc14561d0b872fd82994e06e9c995489a472fa50"
+    },
+    {
+      "path": "RUN_KRISTAL_DEEP_SPLIT.sh",
+      "bytes": 128,
+      "sha256": "c5af016640962dcf944228f73b2b20dbc7d9a4542eda63ac5be59858b4deca2c"
+    },
+    {
+      "path": "RUN_KRISTAL_STANDARD.bat",
+      "bytes": 103,
+      "sha256": "ba8b985f01305b6ecd8903ef2ad3912805ff2ae33d67d18b064e2628e03d3be3"
+    },
+    {
+      "path": "RUN_KRISTAL_STANDARD.ps1",
+      "bytes": 170,
+      "sha256": "4a0bd79d74b9b485a8ca9dba2cf83125ed0e81ed3c26b9faa3cd0ca9c6c7fd37"
+    },
+    {
+      "path": "RUN_LEVELUPDIAG.bat",
+      "bytes": 193,
+      "sha256": "e04bcd6c76f9e53f1c4bc809c19835c8c8edb6ea6bc30bb0a9f889331e646c1d"
+    },
+    {
+      "path": "RUN_LEVELUPDIAG.sh",
+      "bytes": 191,
+      "sha256": "af51cff5fea7d90731cb0256a7f732bad0c0d586c5bcf873b84309866f120746"
+    },
+    {
+      "path": "VALIDATE_HARNESS.bat",
+      "bytes": 291,
+      "sha256": "54789f420e00a9e5e9d539c584c2c96f82e5b3570f3d1ac7fb205e71810b7b4d"
+    },
+    {
+      "path": "VALIDATE_HARNESS.ps1",
+      "bytes": 366,
+      "sha256": "e6287bcbb33dd52e4631e1baba3aef6be74c4778e5331a146be5b232c3d4ad69"
+    },
+    {
+      "path": "VALIDATE_HARNESS.sh",
+      "bytes": 186,
+      "sha256": "10794309d026aaf2e82c2f2d99eb011e43b6b1ec83d1e1408a4be510002509ae"
+    },
+    {
+      "path": "VERSION",
+      "bytes": 6,
+      "sha256": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
+    },
+    {
+      "path": "docs/ADAPTATION_GUIDE.md",
+      "bytes": 791,
+      "sha256": "7c6f5613c3fe7dd48b4105a6dd3c2299c27a6e7bd4729e52cca78d2e095e44a0"
+    },
+    {
+      "path": "docs/ADDING_KRISTAL_LEVELS.md",
+      "bytes": 1348,
+      "sha256": "d5c7ffbc02cce964b18b4f78acc1902bcdd2b539b47afccb910174ce507753fa"
+    },
+    {
+      "path": "docs/AI_ADAPTATION_CONTRACT.json",
+      "bytes": 1445,
+      "sha256": "ea1b2e1ead5be964298f9501053d24b896470b9aa6b0eee9b69f73e99e688fd6"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "bytes": 1743,
+      "sha256": "cfd6558087c3c87ad5b796f6f6a3b68002c09f63e670187387c53f6d67046041"
+    },
+    {
+      "path": "docs/CI_INTEGRATION.md",
+      "bytes": 977,
+      "sha256": "eaee0a96d6fe0fa69d402194590b47b31b2ae8df343d7446089600bf95e22201"
+    },
+    {
+      "path": "docs/CONFIG_REFERENCE.md",
+      "bytes": 1847,
+      "sha256": "a6bea85a4aee223f0f97b219df15bea352465bae59b943256fa9f061f6c3ce9b"
+    },
+    {
+      "path": "docs/KRISTAL_TEST_MATRIX.md",
+      "bytes": 2870,
+      "sha256": "dbf31b00248ba65b687a09f393659c9aff7062e7c1ba065aabca833e4d4dc38b"
+    },
+    {
+      "path": "docs/LEVEL_CONTRACT.md",
+      "bytes": 1355,
+      "sha256": "2eacb2740c3f5b680039bf2c8e385d64549f9596c9c455ba020d99f8b80d76f8"
+    },
+    {
+      "path": "docs/OPERATING_MODEL.md",
+      "bytes": 1881,
+      "sha256": "5693dc50a742404eefdf0ceeb01dd85f9c654557ef418096d959c5d00e92b3b1"
+    },
+    {
+      "path": "docs/RESULT_MODEL.md",
+      "bytes": 963,
+      "sha256": "d2003c15f9a7b5eb67c7ebb22921e7b7124e793688568d0a8fee8bdd3f490139"
+    },
+    {
+      "path": "docs/SECURITY_MODEL.md",
+      "bytes": 1400,
+      "sha256": "f3273066508bfa2f52db08dbe5ef150c6536bd70ea28457435f9401b9a5f6bdb"
+    },
+    {
+      "path": "docs/status/2026-09-16-initial-deep-validation.md",
+      "bytes": 5696,
+      "sha256": "962a195c807973db7dec90f5ad31de441151e388ce0cd42c5b75292995724b8c"
+    },
+    {
+      "path": "levels/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "levels/k10_manifest_integrity.py",
+      "bytes": 2815,
+      "sha256": "0e39acbaf4040096166e6d0ae427220ccd89b633280d7e12a3b5858ce665da7a"
+    },
+    {
+      "path": "levels/k11_negative_release_gate.py",
+      "bytes": 3632,
+      "sha256": "8f06d5253169abe752b442e2ee3927a3a5fdb7c327439aa903d2907168abff22"
+    },
+    {
+      "path": "levels/k12_release_archive_repro.py",
+      "bytes": 2904,
+      "sha256": "53a45388b608ee16bbf809af19d863bbf6e9597c8aef9edcb1d7cf9668e8af15"
+    },
+    {
+      "path": "levels/k13_schema_negative.py",
+      "bytes": 2602,
+      "sha256": "2409855a6632d802adc9737628b2dfc13d3e568dd71b816ef1aea5d3493829ee"
+    },
+    {
+      "path": "levels/k14_jcs_fail_closed.py",
+      "bytes": 2023,
+      "sha256": "b36a83f9cb5ad1a516790d2a4989dd3c0f8fc30bb7ac87fa653997c0272291c3"
+    },
+    {
+      "path": "levels/k15_conformance_coverage.py",
+      "bytes": 1942,
+      "sha256": "6ddf3097967e1a19d89b8867c4bf11e83079fa40bbf61fd726cdc69f0e09d6e9"
+    },
+    {
+      "path": "levels/k16_docs_build.py",
+      "bytes": 1125,
+      "sha256": "c63a5c7768bcf7e4973612752ab78c71ba7b7fb2a38154c40307ff744b64e50c"
+    },
+    {
+      "path": "levels/k17_tool_consistency.py",
+      "bytes": 1052,
+      "sha256": "5eb27741a1ad1a053863f4384a2d8d1cdc3a7ef12e9f4f9c0ecf4c4f442b7310"
+    },
+    {
+      "path": "levels/k18_v5_normative_hygiene.py",
+      "bytes": 2144,
+      "sha256": "d9622b2c6baabeb547d7c627dfa35eba0ad447b931bb1be6b8e42362261dab5f"
+    },
+    {
+      "path": "levels/n00_diagnostic_integrity.py",
+      "bytes": 1543,
+      "sha256": "5c9426bfa1b8ba98add2ceb02de565dadbd9734de2947ef11fadf670818ead80"
+    },
+    {
+      "path": "levels/n01_target_context.py",
+      "bytes": 3313,
+      "sha256": "c7ecee0f33a87cedaf8f6c19556ad0db3b5a948d1fd195cdb297ac345962e275"
+    },
+    {
+      "path": "levels/n02_repository_inventory.py",
+      "bytes": 2237,
+      "sha256": "b08685a674ec5fa647984470127a65b4c3caff84177a5f050257cd6cb7d0ae95"
+    },
+    {
+      "path": "levels/n03_repository_hygiene.py",
+      "bytes": 1965,
+      "sha256": "df66597f468c798f42e50270af823566bf92111d1533151a335c5b1c3ddadcf6"
+    },
+    {
+      "path": "levels/n04_tooling_discovery.py",
+      "bytes": 2428,
+      "sha256": "3cbaa8ec24d3502b06889ab31bbcf7695e3d930363aea8b6c94c9d02c739f10d"
+    },
+    {
+      "path": "levels/n05_declared_validations.py",
+      "bytes": 2903,
+      "sha256": "cc4b462e8a7437ca214f61c9c70a487031ed76c4a9278e547a6c9a7d526d5055"
+    },
+    {
+      "path": "levels/n06_security_hygiene.py",
+      "bytes": 3115,
+      "sha256": "de50f8589c9fe8a3f7634aed4d165d7cb5a3f445aae4736c3c835f377307b6f3"
+    },
+    {
+      "path": "levelupdiag.config.json",
+      "bytes": 2669,
+      "sha256": "2139263885f2c0d827f3ba20729b8ab41fa8e9803e78183372fafd42b27fec93"
+    },
+    {
+      "path": "levelupdiag.config.local.example.json",
+      "bytes": 144,
+      "sha256": "de9a3bfd730f9d70b2c02e6cec23c610e39017291c7f03620aed983c94958c59"
+    },
+    {
+      "path": "levelupdiag.py",
+      "bytes": 310,
+      "sha256": "f7de31f5ee50fdfd0f6fdef202dfc08ce8d54a2488c79c2e448fa7a365ccb11f"
+    },
+    {
+      "path": "levelupdiag_core/__init__.py",
+      "bytes": 134,
+      "sha256": "b16e66d3d6bcb0166413ab7cc5bb8e3b8bfddcfc175c0604df4f681ace54d161"
+    },
+    {
+      "path": "levelupdiag_core/cli.py",
+      "bytes": 4222,
+      "sha256": "1d472d27ad07bea7a6d4c72ea86279940892a4b2e57811fb862d2ac1adae3fdb"
+    },
+    {
+      "path": "levelupdiag_core/commands.py",
+      "bytes": 2025,
+      "sha256": "aeafad0204924212ef702773aa28c46c36c6453b1f61f8ba6d873d462707d5d1"
+    },
+    {
+      "path": "levelupdiag_core/config.py",
+      "bytes": 2108,
+      "sha256": "251938aefaa3987095d3bc91a8ef704590df39fbe8f2d47ddf2e2aae27058b38"
+    },
+    {
+      "path": "levelupdiag_core/manifest.py",
+      "bytes": 1735,
+      "sha256": "91fcb729d15750dca611881887e67c82f6d89a327ae79d0b0103a8c25ee228b8"
+    },
+    {
+      "path": "levelupdiag_core/report.py",
+      "bytes": 2162,
+      "sha256": "9c2a4709d812ce0d93bc771f5aceb9dc4b974e0a894d60e4ea960d4d2b86504e"
+    },
+    {
+      "path": "levelupdiag_core/runner.py",
+      "bytes": 9948,
+      "sha256": "5b0a4c335b6ad1babd4de18849110a45205c53ac7d8fb0613434492a85c619cf"
+    },
+    {
+      "path": "levelupdiag_core/scanner.py",
+      "bytes": 971,
+      "sha256": "7c7fd051c8c5fa028f60e50c2ffb6632d5e37b9347cc588b77352cccc1814d6c"
+    },
+    {
+      "path": "levelupdiag_core/util.py",
+      "bytes": 2388,
+      "sha256": "841abbacb06ff6db176263b470b26f9809c1808e44b5c1029c65181e6d827ba3"
+    },
+    {
+      "path": "levelupdiag_core/vcs.py",
+      "bytes": 844,
+      "sha256": "2f69154ba6f41679db72abc649556c38971ba99ced750e5dc4d5c3076add3c88"
+    },
+    {
+      "path": "levelupdiag_core/verdicts.py",
+      "bytes": 1641,
+      "sha256": "9e27eb559a6b950e119b0c674fb96736037ce29b437bd74cf25037a4d5b2b061"
+    },
+    {
+      "path": "levelupdiag_core/worker.py",
+      "bytes": 1466,
+      "sha256": "c47a9d772065314dbbb0a6abbb7f7d7ca59ddb740b64a86589709e91a6bcdb3b"
+    },
+    {
+      "path": "levelupdiag_manifest.json",
+      "bytes": 7520,
+      "sha256": "ef1d7818b6055351802e05b395bf49392ce306ca0b0db3113b21395aa24b1b4a"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 414,
+      "sha256": "c832c921a3ae542296af7f189bb2736c2fd6e2d7039168c18a0cce9da981e9f7"
+    },
+    {
+      "path": "requirements-dev.txt",
+      "bytes": 60,
+      "sha256": "c32a30b89fa91a8f264a7b2297f239bcc887963325d225baa91f4c7fdb8df338"
+    },
+    {
+      "path": "schemas/campaign-summary.schema.json",
+      "bytes": 745,
+      "sha256": "884280bd039b141e0bdbd8a3c41e192c9d545db9e2de332bbcd771461834547f"
+    },
+    {
+      "path": "schemas/report.schema.json",
+      "bytes": 778,
+      "sha256": "0c235324daf05b12f78f66c8c0d3e7e9c05a66481895e087afdd25027a9a7fa1"
+    },
+    {
+      "path": "scripts/run_deep_split.py",
+      "bytes": 1791,
+      "sha256": "28fd2694dd6c0aea6c7f270f906804d58db5afdc7ba241ef579dd0378bdd8c90"
+    },
+    {
+      "path": "tests/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/test_commands.py",
+      "bytes": 429,
+      "sha256": "ba49555964bcd88e52cd0d0732138eb489b25b777da4f0e3e349d66e2dda7647"
+    },
+    {
+      "path": "tests/test_external_mode.py",
+      "bytes": 1822,
+      "sha256": "8a92ff03fa0f24a5b367268887463b3dc2fe81b643e9319cba1ed62a259902e9"
+    },
+    {
+      "path": "tests/test_manifest.py",
+      "bytes": 404,
+      "sha256": "e7c16543a7efc9768881fe3350bed7e058cabd73a9b189d092bdd53f22284584"
+    },
+    {
+      "path": "tests/test_verdicts.py",
+      "bytes": 595,
+      "sha256": "8e5a43984ccff536e8903097f6f8cf1334feb00935a812bc8e70043d9df201c7"
+    }
+  ]
+}

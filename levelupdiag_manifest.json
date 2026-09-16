@@ -1,0 +1,280 @@
+{
+  "schema": "levelupdiag.manifest.v2",
+  "standard": "LevelUpDiag",
+  "standard_version": "1.0.0",
+  "suite_name": "Kristal Deep Conformance Diagnostics",
+  "suite_version": "0.2.0",
+  "repository_mode": "external-target-harness",
+  "control_dir_default": ".levelupdiag",
+  "levels": [
+    {
+      "id": "N00",
+      "name": "Diagnostic Integrity",
+      "module": "levels.n00_diagnostic_integrity",
+      "category": "diagnostics",
+      "order": 0,
+      "required": true,
+      "depends_on": [],
+      "timeout_seconds": 60,
+      "parallel_safe": true,
+      "purpose": "Validate the diagnostics frame before trusting its output."
+    },
+    {
+      "id": "N01",
+      "name": "Target Context",
+      "module": "levels.n01_target_context",
+      "category": "context",
+      "order": 10,
+      "required": true,
+      "depends_on": [
+        "N00"
+      ],
+      "timeout_seconds": 60,
+      "parallel_safe": true,
+      "purpose": "Resolve target, runtime context, VCS state, paths and basic executability."
+    },
+    {
+      "id": "N02",
+      "name": "Repository Inventory",
+      "module": "levels.n02_repository_inventory",
+      "category": "inventory",
+      "order": 20,
+      "required": true,
+      "depends_on": [
+        "N01"
+      ],
+      "timeout_seconds": 120,
+      "parallel_safe": true,
+      "purpose": "Collect bounded technology-neutral evidence about repository shape and capabilities."
+    },
+    {
+      "id": "N03",
+      "name": "Repository Hygiene",
+      "module": "levels.n03_repository_hygiene",
+      "category": "hygiene",
+      "order": 30,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 180,
+      "parallel_safe": true,
+      "purpose": "Detect repository-level integrity and hygiene hazards."
+    },
+    {
+      "id": "N04",
+      "name": "Tooling Discovery",
+      "module": "levels.n04_tooling_discovery",
+      "category": "tooling",
+      "order": 40,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 120,
+      "parallel_safe": true,
+      "purpose": "Discover project manifests, automation surfaces and candidate tools without making them mandatory."
+    },
+    {
+      "id": "N05",
+      "name": "Declared Validations",
+      "module": "levels.n05_declared_validations",
+      "category": "validation",
+      "order": 50,
+      "required": true,
+      "depends_on": [
+        "N01",
+        "N02"
+      ],
+      "timeout_seconds": 1800,
+      "parallel_safe": false,
+      "purpose": "Execute only validations explicitly declared by the local diagnostics configuration."
+    },
+    {
+      "id": "N06",
+      "name": "Security Hygiene",
+      "module": "levels.n06_security_hygiene",
+      "category": "security_hygiene",
+      "order": 60,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 180,
+      "parallel_safe": true,
+      "purpose": "Perform bounded conservative hygiene checks without claiming a security audit."
+    },
+    {
+      "id": "K10",
+      "name": "Kristal Manifest Integrity",
+      "module": "levels.k10_manifest_integrity",
+      "category": "kristal",
+      "order": 100,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Validate schema manifest hashes/digests and release identity."
+    },
+    {
+      "id": "K11",
+      "name": "Kristal Negative Release Gate",
+      "module": "levels.k11_negative_release_gate",
+      "category": "kristal",
+      "order": 110,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Mutate critical release inputs and verify the release gate fails closed."
+    },
+    {
+      "id": "K12",
+      "name": "Kristal Release Archive Reproducibility",
+      "module": "levels.k12_release_archive_repro",
+      "category": "kristal",
+      "order": 120,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Build release archives repeatedly and test runtime-evidence isolation."
+    },
+    {
+      "id": "K13",
+      "name": "Kristal Schema Negative Cases",
+      "module": "levels.k13_schema_negative",
+      "category": "kristal",
+      "order": 130,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Verify required/schema-version negative mutations are rejected."
+    },
+    {
+      "id": "K14",
+      "name": "Kristal JCS Fail-Closed",
+      "module": "levels.k14_jcs_fail_closed",
+      "category": "kristal",
+      "order": 140,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Verify JCS vectors pass and tampered vectors/hashes fail."
+    },
+    {
+      "id": "K15",
+      "name": "Kristal Conformance Coverage",
+      "module": "levels.k15_conformance_coverage",
+      "category": "kristal",
+      "order": 150,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Assess executable coverage of normative EX/RP conformance requirements."
+    },
+    {
+      "id": "K16",
+      "name": "Kristal Strict Docs Build",
+      "module": "levels.k16_docs_build",
+      "category": "kristal",
+      "order": 160,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Run mkdocs build --strict when the declared toolchain is available."
+    },
+    {
+      "id": "K17",
+      "name": "Kristal Tool Consistency",
+      "module": "levels.k17_tool_consistency",
+      "category": "kristal",
+      "order": 170,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 300,
+      "parallel_safe": false,
+      "purpose": "Ensure repository manifest tooling agrees with the authoritative release policy."
+    },
+    {
+      "id": "K18",
+      "name": "Kristal v5 Normative Hygiene",
+      "module": "levels.k18_v5_normative_hygiene",
+      "category": "kristal",
+      "order": 180,
+      "required": true,
+      "depends_on": [
+        "N02"
+      ],
+      "timeout_seconds": 180,
+      "parallel_safe": true,
+      "purpose": "Detect stale major-version markers and release-status ambiguity in normative v5 validation documentation."
+    }
+  ],
+  "campaigns": {
+    "baseline": {
+      "description": "Universal read-oriented diagnostics with no target command execution.",
+      "levels": [
+        "N00",
+        "N01",
+        "N02",
+        "N03",
+        "N04",
+        "N06"
+      ]
+    },
+    "standard": {
+      "description": "Baseline plus explicitly declared validators.",
+      "levels": [
+        "N00",
+        "N01",
+        "N02",
+        "N03",
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    "deep": {
+      "description": "Maximum local Kristal validation: neutral diagnostics, native validators, fail-closed mutation tests, reproducibility and conformance coverage.",
+      "levels": [
+        "N00",
+        "N01",
+        "N02",
+        "N03",
+        "N04",
+        "N05",
+        "N06",
+        "K10",
+        "K11",
+        "K12",
+        "K13",
+        "K14",
+        "K15",
+        "K16",
+        "K17",
+        "K18"
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "levelupdiag.ai-adaptation-contract.v1",
+  "objective": "Maintain an external deep-validation harness for Kristal Framework without duplicating Kristal implementation semantics or writing into the target repository.",
+  "invariants": [
+    "Keep levelupdiag_kristal outside kristal-framework.",
+    "Store generated evidence under the harness repository by default.",
+    "Prefer native Kristal validators/builders/verifiers over duplicated implementations.",
+    "Perform destructive/adversarial mutations only in temporary copies.",
+    "Keep target mutation and network disabled by default.",
+    "Use stable finding IDs and bounded/redacted evidence.",
+    "Do not accept required SKIP/BLOCKED/PARTIAL/INFRA_ERROR as PASS.",
+    "Distinguish framework integrity, reference implementation conformance, ecosystem conformance and production qualification.",
+    "Treat missing executable EX/RP coverage as BLOCKED, not PASS."
+  ],
+  "adaptable_surfaces": [
+    "levelupdiag_manifest.json",
+    "levelupdiag.config.json",
+    "levelupdiag_core/",
+    "levels/",
+    "schemas/",
+    "docs/",
+    "scripts/",
+    "launchers/"
+  ],
+  "recommended_sequence": [
+    "run harness self-tests",
+    "run baseline",
+    "run standard native validators",
+    "run deep or deep-split",
+    "inspect FAIL/BLOCKED/INFRA_ERROR separately",
+    "fix target or harness according to evidence",
+    "rerun and preserve qualification evidence"
+  ]
+}
