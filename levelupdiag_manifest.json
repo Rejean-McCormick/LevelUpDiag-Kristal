@@ -3,7 +3,7 @@
   "standard": "LevelUpDiag",
   "standard_version": "1.0.0",
   "suite_name": "Kristal Deep Conformance Diagnostics",
-  "suite_version": "0.3.0",
+  "suite_version": "0.5.0",
   "repository_mode": "external-target-harness",
   "control_dir_default": ".levelupdiag",
   "levels": [
@@ -176,7 +176,7 @@
     },
     {
       "id": "K15",
-      "name": "Kristal Conformance Coverage",
+      "name": "Kristal Implementation Adapter Conformance",
       "module": "levels.k15_conformance_coverage",
       "category": "kristal",
       "order": 150,
@@ -184,9 +184,9 @@
       "depends_on": [
         "N02"
       ],
-      "timeout_seconds": 300,
+      "timeout_seconds": 600,
       "parallel_safe": false,
-      "purpose": "Separate framework-vector TCK coverage from external implementation-adapter conformance readiness."
+      "purpose": "Execute the external implementation adapter against official Exchange and Runtime Pack core vectors."
     },
     {
       "id": "K16",
@@ -312,7 +312,7 @@
       ],
       "timeout_seconds": 180,
       "parallel_safe": false,
-      "purpose": "Validate signature/trust contract surfaces and require an external crypto adapter for executable security conformance."
+      "purpose": "Execute external Ed25519 signature and trust/revocation verification against independent ephemeral fixtures."
     }
   ],
   "campaigns": {

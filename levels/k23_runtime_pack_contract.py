@@ -30,6 +30,16 @@ def run(cfg, report):
     versions = sorted({v.get('input', {}).get('runtime_pack_version') for v in vectors.get('vectors', [])})
     report.add('kristal.runtime_pack.tck_core_version', 'PASS' if versions == ['5.0.0'] else 'FAIL', 'runtime_pack', 'Core Runtime Pack TCK vectors use format version 5.0.0 independent of framework rc suffix.' if versions == ['5.0.0'] else 'Runtime Pack vector version drift detected.', evidence=versions)
 
+    portable_path = base / '09-test-vectors/runtime-pack/portable-vectors.json'
+    portable_ok = False
+    portable_ids = []
+    if portable_path.exists():
+        portable = json.loads(portable_path.read_text(encoding='utf-8'))
+        portable_ids = sorted(v.get('id') for v in portable.get('vectors', []) if isinstance(v, dict) and v.get('id'))
+        portable_ok = portable.get('profile') == 'kristal.v5:runtime-pack-portable-conformance@1' and set(portable_ids) == {'RP-002','RP-003','RP-004','RP-005','RP-005-NORUN'}
+    report.add('kristal.runtime_pack.portable_profile_vectors', 'PASS' if portable_ok else 'FAIL', 'runtime_pack',
+               'RP-2..RP-5 portable byte-profile vectors are published and complete.' if portable_ok else 'RP-2..RP-5 portable byte-profile vectors are missing or incomplete.', evidence=portable_ids)
+
     rp6 = next((v for v in vectors.get('vectors', []) if v.get('id') == 'RP-006'), None)
     tamper_ok = bool(rp6 and rp6.get('expect_payload_integrity') == 'fail')
     report.add('kristal.runtime_pack.tamper_vector_present', 'PASS' if tamper_ok else 'FAIL', 'runtime_pack', 'RP-006 provides an explicit fail-closed payload-integrity vector.' if tamper_ok else 'RP-006 fail-closed payload vector is missing or weakened.')

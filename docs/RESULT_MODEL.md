@@ -23,7 +23,7 @@ A level's `required` flag affects completeness, not whether an observed `FAIL` m
 
 ## Deep Split aggregation
 
-`RUN_KRISTAL_DEEP_SPLIT` deliberately runs heavy selections separately. In v0.3 it then reconstructs the complete `deep` level set from the resulting evidence and writes a master summary:
+`RUN_KRISTAL_DEEP_SPLIT` deliberately runs heavy selections separately. In v0.4 it reconstructs the complete `deep` level set from the resulting evidence and writes a master summary:
 
 ```text
 .levelupdiag/split-runs/<timestamp>/summary.json

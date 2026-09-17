@@ -24,7 +24,7 @@
 
 ## rc.2 release model
 
-LevelUpDiag v0.3 follows the Kristal rc.2 release model:
+LevelUpDiag v0.4 follows the Kristal rc.2 release model:
 
 - Git tag + immutable commit identify published repository bytes;
 - `contract-set.manifest.json` is a curated contract-surface index, not a per-file hash inventory;
@@ -81,6 +81,7 @@ exchange_id
 verify_exchange
 build_runtime_pack
 verify_runtime_pack
+verify_runtime_profiles
 ```
 
 The implementation does not need to live in `kristal-framework`.
@@ -98,3 +99,8 @@ K22 verifies that Exchange and Runtime Pack vector profiles agree with the TCK d
 K23 verifies Runtime Pack artifact type, version shape, core `5.0.0` vectors and explicit tamper rejection.
 
 K24 validates the published security contract but remains `BLOCKED` for executable cryptographic conformance until an external verifier exposes signature/trust operations. A contract-only PASS is not promoted to production-security PASS.
+
+
+## Portable Runtime Pack implementation gate
+
+K15 uses `verify_runtime_profiles` to execute RP-002, RP-003, RP-004, RP-005, and RP-005-NORUN under `kristal.v5:runtime-pack-portable-conformance@1`. Exact bytes are required.

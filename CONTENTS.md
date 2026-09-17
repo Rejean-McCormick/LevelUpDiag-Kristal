@@ -1,18 +1,18 @@
-# Repository contents
+# Repository Contents
 
-Generated for the 0.3.0 delivery. Runtime evidence (`.levelupdiag/`) and Python caches are not part of the repository package.
+Generated for the 0.5.0 delivery. Runtime evidence (`.levelupdiag/`), local machine config, and Python caches are not part of the repository package.
 
-Files listed: 85
+Files: 88
 
 | Path | Bytes |
 |---|---:|
 | `.github/workflows/self-test.yml` | 592 |
 | `.gitignore` | 96 |
 | `.smartignore` | 46 |
-| `CHANGELOG.md` | 981 |
+| `CHANGELOG.md` | 1893 |
+| `CONFIGURE_REFERENCE_ADAPTER.pyw` | 3360 |
 | `LEVELUPDIAG_KRISTAL_LAUNCHER.pyw` | 12353 |
-| `README.md` | 5763 |
-| `REPO_MANIFEST.json` | 13810 |
+| `README.md` | 6405 |
 | `RUN_KRISTAL_DEEP.bat` | 99 |
 | `RUN_KRISTAL_DEEP.ps1` | 268 |
 | `RUN_KRISTAL_DEEP.sh` | 126 |
@@ -32,31 +32,33 @@ Files listed: 85
 | `docs/AI_ADAPTATION_CONTRACT.json` | 1445 |
 | `docs/ARCHITECTURE.md` | 1743 |
 | `docs/CI_INTEGRATION.md` | 977 |
-| `docs/CONFIG_REFERENCE.md` | 2676 |
-| `docs/KRISTAL_TEST_MATRIX.md` | 4600 |
+| `docs/CONFIG_REFERENCE.md` | 2811 |
+| `docs/KRISTAL_TEST_MATRIX.md` | 4849 |
 | `docs/LEVEL_CONTRACT.md` | 1355 |
 | `docs/OPERATING_MODEL.md` | 2600 |
-| `docs/RESULT_MODEL.md` | 1515 |
+| `docs/RESULT_MODEL.md` | 1510 |
 | `docs/SECURITY_MODEL.md` | 1400 |
 | `docs/status/2026-09-16-initial-deep-validation.md` | 6066 |
 | `docs/status/2026-09-16-rc2-harness-realignment.md` | 1304 |
+| `docs/status/2026-09-16-v0.4-reference-adapter.md` | 718 |
+| `docs/status/2026-09-16-v0.5-runtime-pack-portable-conformance.md` | 432 |
 | `levels/__init__.py` | 0 |
-| `levels/_kristal_helpers.py` | 3955 |
+| `levels/_kristal_helpers.py` | 5107 |
 | `levels/k10_manifest_integrity.py` | 4365 |
 | `levels/k11_negative_release_gate.py` | 3633 |
 | `levels/k12_release_archive_repro.py` | 4840 |
 | `levels/k13_schema_negative.py` | 2602 |
 | `levels/k14_jcs_fail_closed.py` | 2023 |
-| `levels/k15_conformance_coverage.py` | 3061 |
+| `levels/k15_conformance_coverage.py` | 10626 |
 | `levels/k16_docs_build.py` | 1125 |
 | `levels/k17_tool_consistency.py` | 2765 |
 | `levels/k18_v5_normative_hygiene.py` | 2144 |
 | `levels/k19_schema_format_fail_closed.py` | 1731 |
-| `levels/k20_cross_document_contract_mutation.py` | 2531 |
+| `levels/k20_cross_document_contract_mutation.py` | 3368 |
 | `levels/k21_git_release_identity.py` | 3762 |
 | `levels/k22_tck_profile_consistency.py` | 2539 |
-| `levels/k23_runtime_pack_contract.py` | 3162 |
-| `levels/k24_signature_trust.py` | 3013 |
+| `levels/k23_runtime_pack_contract.py` | 4003 |
+| `levels/k24_signature_trust.py` | 4936 |
 | `levels/n00_diagnostic_integrity.py` | 1543 |
 | `levels/n01_target_context.py` | 3313 |
 | `levels/n02_repository_inventory.py` | 2237 |
@@ -65,7 +67,7 @@ Files listed: 85
 | `levels/n05_declared_validations.py` | 2903 |
 | `levels/n06_security_hygiene.py` | 3115 |
 | `levelupdiag.config.json` | 2889 |
-| `levelupdiag.config.local.example.json` | 1133 |
+| `levelupdiag.config.local.example.json` | 1229 |
 | `levelupdiag.py` | 310 |
 | `levelupdiag_core/__init__.py` | 134 |
 | `levelupdiag_core/cli.py` | 4222 |
@@ -79,15 +81,16 @@ Files listed: 85
 | `levelupdiag_core/vcs.py` | 844 |
 | `levelupdiag_core/verdicts.py` | 1641 |
 | `levelupdiag_core/worker.py` | 1466 |
-| `levelupdiag_manifest.json` | 10439 |
+| `levelupdiag_manifest.json` | 10445 |
 | `pyproject.toml` | 414 |
 | `requirements-dev.txt` | 60 |
 | `schemas/campaign-summary.schema.json` | 745 |
 | `schemas/report.schema.json` | 778 |
+| `scripts/generate_crypto_fixtures.mjs` | 2045 |
 | `scripts/run_deep_split.py` | 9462 |
 | `tests/__init__.py` | 0 |
 | `tests/test_commands.py` | 429 |
 | `tests/test_external_mode.py` | 1822 |
 | `tests/test_manifest.py` | 404 |
-| `tests/test_v03_contract.py` | 1547 |
+| `tests/test_v03_contract.py` | 1786 |
 | `tests/test_verdicts.py` | 595 |

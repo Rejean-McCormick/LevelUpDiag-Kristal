@@ -65,7 +65,7 @@ python scripts/run_deep_split.py --target ../kristal-framework
 
 ## Kristal rc.2 model
 
-v0.3 follows the current Kristal release model:
+v0.4 follows the current Kristal release model:
 
 ```text
 Git tag + immutable commit
@@ -88,7 +88,7 @@ tools/build_manifests.py
 
 ## Deep Split
 
-`Deep Split` is the recommended maximum campaign on Windows. Heavy levels run as isolated LevelUpDiag invocations, but v0.3 consolidates them afterward into one authoritative summary:
+`Deep Split` is the recommended maximum campaign on Windows. Heavy levels run as isolated LevelUpDiag invocations, and v0.4 consolidates them afterward into one authoritative summary:
 
 ```text
 .levelupdiag/latest/summary.json
@@ -137,7 +137,7 @@ implementation conformance PASS
 production qualification PASS
 ```
 
-K15 remains `BLOCKED` until a concrete compiler/verifier implementation is connected. K24 remains `BLOCKED` until executable signature/trust verification is connected. Those are meaningful missing proofs, not framework failures.
+With `kristal-reference` configured, K15 executes the official Exchange/Runtime Pack core vectors against the external implementation and K24 executes independent Ed25519/trust fixtures. RP-2..RP-5 remain a later byte-format qualification surface until the framework publishes sufficiently pinned fixtures/profiles.
 
 ## External implementation adapter
 
@@ -153,6 +153,7 @@ Do not place a reference implementation inside `kristal-framework` only to satis
       "verify_exchange": ["..."],
       "build_runtime_pack": ["..."],
       "verify_runtime_pack": ["..."],
+      "verify_runtime_profiles": ["..."],
       "verify_signature": ["..."],
       "verify_trust": ["..."]
     }
@@ -160,7 +161,7 @@ Do not place a reference implementation inside `kristal-framework` only to satis
 }
 ```
 
-Use `levelupdiag.config.local.json`; it is machine-local and Git-ignored.
+Use `levelupdiag.config.local.json`; it is machine-local and Git-ignored. The repository also includes `CONFIGURE_REFERENCE_ADAPTER.pyw`, which safely creates/updates this local adapter block for the standard sibling layout.
 
 ## Evidence boundary
 
@@ -239,3 +240,7 @@ On Windows:
 This repository owns validation orchestration, adversarial test definitions, qualification evidence and adapter boundaries.
 
 It does **not** own Kristal schemas, Exchange/Runtime Pack semantics, Da’at implementation, Interaction Kernel contracts, or Orgo/Konnaxion operational state.
+
+### Runtime Pack portable profile (v0.5)
+
+When `kristal-reference >= 0.2.0` is connected, K15 executes RP-2 through RP-5 against `kristal.v5:runtime-pack-portable-conformance@1` and requires exact golden bytes. Rerun `CONFIGURE_REFERENCE_ADAPTER.pyw` after applying the v0.5 overlay so the local adapter config receives the `verify_runtime_profiles` operation.

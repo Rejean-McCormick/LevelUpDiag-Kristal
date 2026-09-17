@@ -49,3 +49,13 @@ def run(cfg, report):
         rule['properties']['authority_recognition_refs'].pop('minItems', None)
         write_json(p, obj)
     expect_reject(report, src, 'reference_exchange_authority_rule', weaken_reference_exchange, 'a reference_exchange rule without mandatory authority recognition')
+
+    def drift_runtime_pack_policy_schema(root: Path):
+        p = root / 'docs/Technical-Reference/kristal-docs-v5/02-schemas/runtime-pack-manifest.schema.json'
+        obj = json.loads(p.read_text(encoding='utf-8'))
+        policies = obj['properties']['policies']['properties']
+        policies['data_ordering']['properties']['policy']['enum'] = ['qid_pid_statement_id_asc', 'source_order_preserved', 'none']
+        bloom = next(v for v in policies['membership_filter']['oneOf'] if v.get('properties', {}).get('kind', {}).get('const') == 'bloom')
+        bloom['required'] = [x for x in bloom['required'] if x != 'hash_functions']
+        write_json(p, obj)
+    expect_reject(report, src, 'runtime_pack_policy_schema_drift', drift_runtime_pack_policy_schema, 'Runtime Pack policy/schema drift from the normative allowed-policy set')

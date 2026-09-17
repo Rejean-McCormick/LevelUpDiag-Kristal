@@ -5,52 +5,52 @@
     "default_timeout_seconds": 180
   },
   "implementation_adapter": {
-    "enabled": false,
+    "enabled": true,
     "cwd": "../kristal-reference",
     "commands": {
       "exchange_id": [
-        "python",
-        "-m",
-        "kristal_ref",
+        "node",
+        "bin/kristal-ref.mjs",
         "exchange-id",
         "{input}"
       ],
       "verify_exchange": [
-        "python",
-        "-m",
-        "kristal_ref",
+        "node",
+        "bin/kristal-ref.mjs",
         "verify-exchange",
         "{input}"
       ],
       "build_runtime_pack": [
-        "python",
-        "-m",
-        "kristal_ref",
+        "node",
+        "bin/kristal-ref.mjs",
         "build-runtime-pack",
         "{input}",
         "{output_dir}"
       ],
       "verify_runtime_pack": [
-        "python",
-        "-m",
-        "kristal_ref",
+        "node",
+        "bin/kristal-ref.mjs",
         "verify-runtime-pack",
         "{manifest}",
         "{payload_dir}"
       ],
       "verify_signature": [
-        "python",
-        "-m",
-        "kristal_ref",
+        "node",
+        "bin/kristal-ref.mjs",
         "verify-signature",
         "{fixture}"
       ],
       "verify_trust": [
-        "python",
-        "-m",
-        "kristal_ref",
+        "node",
+        "bin/kristal-ref.mjs",
         "verify-trust",
         "{fixture}"
+      ],
+      "verify_runtime_profiles": [
+        "node",
+        "bin/kristal-ref.mjs",
+        "verify-runtime-profile",
+        "{vectors}"
       ]
     }
   }

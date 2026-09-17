@@ -7,13 +7,13 @@ from pathlib import Path
 from levelupdiag_core.manifest import load_manifest, resolve_selection
 
 
-class V03ContractTests(unittest.TestCase):
+class V05ContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.root = Path(__file__).resolve().parents[1]
 
-    def test_version_is_030(self):
-        self.assertEqual((self.root / 'VERSION').read_text(encoding='utf-8').strip(), '0.3.0')
+    def test_version_is_050(self):
+        self.assertEqual((self.root / 'VERSION').read_text(encoding='utf-8').strip(), '0.5.0')
 
     def test_retired_manifest_generator_not_declared(self):
         cfg = json.loads((self.root / 'levelupdiag.config.json').read_text(encoding='utf-8'))
@@ -31,6 +31,11 @@ class V03ContractTests(unittest.TestCase):
         text = (self.root / 'scripts/run_deep_split.py').read_text(encoding='utf-8')
         self.assertIn("resolve_selection(manifest, 'deep')", text)
         self.assertIn("write_json(latest / 'summary.json', summary)", text)
+
+    def test_reference_adapter_has_runtime_profile_operation(self):
+        import json
+        source = (self.root / 'CONFIGURE_REFERENCE_ADAPTER.pyw').read_text(encoding='utf-8')
+        self.assertIn('verify_runtime_profiles', source)
 
     def test_external_adapter_disabled_by_default(self):
         cfg = json.loads((self.root / 'levelupdiag.config.json').read_text(encoding='utf-8'))

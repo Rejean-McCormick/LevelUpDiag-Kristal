@@ -123,3 +123,34 @@ def flatten_keys(obj):
     elif isinstance(obj, list):
         for value in obj:
             yield from flatten_keys(value)
+
+
+def adapter_settings(cfg):
+    adapter = cfg.get('implementation_adapter') or {}
+    cwd = Path(adapter.get('cwd', '.'))
+    if not cwd.is_absolute():
+        cwd = (Path(cfg['_tool_root']) / cwd).resolve(strict=False)
+    return adapter, cwd, adapter.get('commands') or {}
+
+
+def render_adapter_command(template, **values):
+    if not isinstance(template, list) or not template:
+        raise ValueError('adapter command must be a non-empty argv list')
+    rendered = []
+    for item in template:
+        text = str(item)
+        for key, value in values.items():
+            text = text.replace('{' + key + '}', str(value))
+        rendered.append(text)
+    return rendered
+
+
+def run_adapter(cfg, operation: str, *, timeout: int = 90, **values):
+    adapter, cwd, commands = adapter_settings(cfg)
+    if not adapter.get('enabled'):
+        raise RuntimeError('implementation adapter is disabled')
+    if operation not in commands:
+        raise RuntimeError(f'implementation adapter operation is not configured: {operation}')
+    argv = render_adapter_command(commands[operation], **values)
+    cp = run(argv, cwd, timeout)
+    return cp, cwd, argv
