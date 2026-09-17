@@ -1,0 +1,47 @@
+{
+  "target_repo_root": "C:/mycode/Kristal/kristal-framework",
+  "implementation_adapter": {
+    "enabled": true,
+    "cwd": "../kristal-reference",
+    "commands": {
+      "exchange_id": [
+        "node",
+        "bin/kristal-ref.mjs",
+        "exchange-id",
+        "{input}"
+      ],
+      "verify_exchange": [
+        "node",
+        "bin/kristal-ref.mjs",
+        "verify-exchange",
+        "{input}"
+      ],
+      "build_runtime_pack": [
+        "node",
+        "bin/kristal-ref.mjs",
+        "build-runtime-pack",
+        "{input}",
+        "{output_dir}"
+      ],
+      "verify_runtime_pack": [
+        "node",
+        "bin/kristal-ref.mjs",
+        "verify-runtime-pack",
+        "{manifest}",
+        "{payload_dir}"
+      ],
+      "verify_signature": [
+        "node",
+        "bin/kristal-ref.mjs",
+        "verify-signature",
+        "{fixture}"
+      ],
+      "verify_trust": [
+        "node",
+        "bin/kristal-ref.mjs",
+        "verify-trust",
+        "{fixture}"
+      ]
+    }
+  }
+}
